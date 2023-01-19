@@ -1,6 +1,6 @@
 import Button from "../../atoms/Button/Button"
 import { IDataAPI } from "../../organism/agroupItensHome/Home"
-import './styleGroupButtons.css'
+import './styleGroupButtons.scss'
 
 interface IhandleClick {
     handleClick: (nota?: number) => void

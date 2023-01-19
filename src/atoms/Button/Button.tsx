@@ -1,4 +1,4 @@
-import './styleButton.css'
+import styles from './styleButton.module.css'
 
 interface ValuesButton {
     text: string;
@@ -6,7 +6,7 @@ interface ValuesButton {
 }
 const Button = ({ text, handleClick }: ValuesButton) => {
     return (
-        <button type={'button'} onClick={handleClick}>{text}</button >
+        <button className={styles.button} type={'button'} onClick={handleClick}>{text}</button >
     )
 }
 
