@@ -1,4 +1,4 @@
-import './styleComment.css'
+import './styleComment.scss'
 
 interface ITextComment {
     nameSerie: string;

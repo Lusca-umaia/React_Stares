@@ -1,5 +1,5 @@
 import React, { ButtonHTMLAttributes, HtmlHTMLAttributes, useEffect, useState } from "react"
-import './styleHome.css'
+import './styleHome.scss'
 
 import axios from "axios"
 

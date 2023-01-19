@@ -1,4 +1,4 @@
-button {
+.button {
     padding: 5px 20px;
     font-size: 1.3em;
     font-weight: 700;
@@ -10,7 +10,7 @@ button {
     transition: .7s all;
 }
 
-button:hover {
+.button:hover {
     color: #00EE00;
     background-color: #fff;
 }
