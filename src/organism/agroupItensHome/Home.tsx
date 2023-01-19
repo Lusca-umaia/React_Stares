@@ -1,53 +1,49 @@
-import { useEffect, useState } from "react"
+import React, { ButtonHTMLAttributes, HtmlHTMLAttributes, useEffect, useState } from "react"
+import './styleHome.css'
 
 import axios from "axios"
 
-import './styleHome.css'
 import GroupButtons from "../../molecul/groupButtons/GroupButtons"
 import TextComment from "../../molecul/TextComment/TextComment"
 import Button from "../../atoms/Button/Button"
 import RenderItem from "../../molecul/RenderItem/RenderItem"
 
-let i = 1
+
+export interface IDataAPI {
+    anime: string;
+    character: string;
+    quote: string;
+    nota?: number;
+    id: number;
+}
 
 export default function Home() {
     const [index, setIndex] = useState(0)
     const [init, setInit] = useState(0)
-    const [array, setArray] = useState([])
+    const [array, setArray] = useState<IDataAPI[]>([])
 
     async function dataApi() {
         const res = await axios.get('https://animechan.vercel.app/api/random');
-        res.data.nota = 0
-        res.data.id = i
-        i++
-        array.push(res.data)
+        const resValue: IDataAPI = res.data
+        resValue.nota = 0
+        array.push(resValue)
+        setArray(array)
     }
 
     useEffect(() => {
         dataApi()
     }, [index])
 
-    function identificador(number, nota) {
-        array.forEach((item) => {
-            if (item.id == number) {
-                item.nota = nota
-            }
-        })
+    function identificador(nota?: number) {
+        array[index].nota = nota
         setIndex(index + 1)
     }
 
     function renderResult() {
-        array.sort(function (a, b) {
-            if (a.nota > b.nota) {
-                return -1
-            }
-            else {
-                return true
-            }
-        })
+        array.sort((a, b) => a.nota && b.nota ? b.nota - a.nota : 0)
 
         return (
-            array.map((item, index) => (
+            array.map((item: IDataAPI, index: number) => (
                 item.nota != 0 ? <RenderItem name={item.anime} character={item.character} nota={item.nota} citation={item.quote} position={index + 1} /> : null
             ))
         )
@@ -67,12 +63,12 @@ export default function Home() {
             <div>
                 {index < array.length && init == 1 && (
                     <div>
-                        <TextComment Citation={array[index].quote}
-                            nameSerie={array[index].anime}
-                            Personage={array[index].character} />
+                        <TextComment Citation={array[array.length - 1].quote}
+                            nameSerie={array[array.length - 1].anime}
+                            Personage={array[array.length - 1].character} />
                         <div className="agroupNota">
                             <h3>Nota:</h3>
-                            <GroupButtons handleClick={(e) => identificador(array[index].id, parseInt(e.target.value))} />
+                            <GroupButtons handleClick={identificador} />
                         </div>
                     </div>
                 )}

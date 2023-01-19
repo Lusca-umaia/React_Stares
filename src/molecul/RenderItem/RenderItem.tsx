@@ -1,6 +1,13 @@
 import './styleRender.css'
+interface IRenderItem {
+    citation: string;
+    nota?: number;
+    name: string;
+    position: number;
+    character: string;
+}
 
-export default function RenderItem({ citation, nota, name, position, character }) {
+export default function RenderItem({ citation, nota, name, position, character }: IRenderItem) {
     return (
         <div className="boxRender">
             <h2><span>{position}° -</span> <span className='bottomEffect'>Nome do anime:</span> {name}</h2>
