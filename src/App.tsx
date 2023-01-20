@@ -1,11 +1,19 @@
 import Home from './organism/agroupItensHome/Home'
+import Login from './organism/agroupItensHome/Login';
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 function App() {
 
   return (
     <div className="App">
-     <Home/>
-     </div>
+      <Router>
+        <Routes>
+          <Route path='/' element={<Login />}>
+          </Route>
+          <Route element={<Home />} path='/AnimeCitations'></Route>
+        </Routes>
+      </Router>
+    </div>
   )
 }
 

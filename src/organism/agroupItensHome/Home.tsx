@@ -36,6 +36,8 @@ export default function Home() {
 
     function identificador(nota?: number) {
         array[index].nota = nota
+        console.log(array[index])
+        console.log(index)
         setIndex(index + 1)
     }
 
@@ -53,7 +55,7 @@ export default function Home() {
         <section className="containerHome">
             {init == 0 ? (
                 <div className="boxWelcome">
-                    <h1>Seja bem vindo(a)</h1>
+                    <h1>Seja bem-vindo(a)</h1>
                     <Button handleClick={() => { setInit(1) }} text='Iniciar' />
                 </div>
             )
@@ -63,9 +65,9 @@ export default function Home() {
             <div>
                 {index < array.length && init == 1 && (
                     <div>
-                        <TextComment Citation={array[array.length - 1].quote}
-                            nameSerie={array[array.length - 1].anime}
-                            Personage={array[array.length - 1].character} />
+                        <TextComment Citation={array[index].quote}
+                            nameSerie={array[index].anime}
+                            Personage={array[index].character} />
                         <div className="agroupNota">
                             <h3>Nota:</h3>
                             <GroupButtons handleClick={identificador} />
