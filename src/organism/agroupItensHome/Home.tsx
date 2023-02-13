@@ -17,17 +17,25 @@ export interface IDataAPI {
     id: number;
 }
 
+
+
 export default function Home() {
     const [index, setIndex] = useState(0)
     const [init, setInit] = useState(0)
     const [array, setArray] = useState<IDataAPI[]>([])
 
     async function dataApi() {
-        const res = await axios.get('https://animechan.vercel.app/api/random');
-        const resValue: IDataAPI = res.data
-        resValue.nota = 0
-        array.push(resValue)
-        setArray(array)
+        try {
+            const res = await axios.get('https://animechan.vercel.app/api/random');
+            const resValue: IDataAPI = res.data
+            resValue.nota = 0
+            array.push(resValue)
+            setArray(array)
+
+        } catch (error: any) {
+            console.log('erro:', error.menssage)
+        }
+
     }
 
     useEffect(() => {
@@ -36,8 +44,6 @@ export default function Home() {
 
     function identificador(nota?: number) {
         array[index].nota = nota
-        console.log(array[index])
-        console.log(index)
         setIndex(index + 1)
     }
 
@@ -86,3 +92,4 @@ export default function Home() {
         </section>
     )
 }
+
